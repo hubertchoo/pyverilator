@@ -431,7 +431,8 @@ class PyVerilator:
                          + verilog_path_args \
                          + verilog_defines \
                          + ['-CFLAGS',
-                           '-fPIC -shared --std=c++11 -DVL_USER_FINISH',
+                        #    '-fPIC -shared --std=c++11 -DVL_USER_FINISH',
+                           '-fPIC -shared -DVL_USER_FINISH',
                             '--trace',
                             '--cc',
                             top_verilog_file,
@@ -450,6 +451,8 @@ class PyVerilator:
             result = re.search('(VL_' + signal_type + r'[^(]*)\(([^,]+),([0-9]+),([0-9]+)(?:,[0-9]+)?\);', line)
             if result:
                 signal_name = result.group(2)
+                # sometime after verilator 4.012, these declarations contain &s
+                signal_name = signal_name.replace("&", "")
                 if signal_type == 'SIG':
                     if signal_name.startswith(verilog_module_name) and '[' not in signal_name and int(
                             result.group(4)) == 0:
