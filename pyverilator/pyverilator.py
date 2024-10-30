@@ -371,7 +371,7 @@ class PyVerilator:
     @classmethod
     def build(cls, top_verilog_file, verilog_path = [], build_dir = 'obj_dir',
               json_data = None, gen_only = False, quiet=False,
-              command_args=(), verilog_defines=()):
+              command_args=(), verilog_defines=(), add_verilator_args=[]):
         """Build an object file from verilog and load it into python.
 
         Creates a folder build_dir in which it puts all the files necessary to create
@@ -430,8 +430,8 @@ class PyVerilator:
         verilator_args = ['perl', which_verilator, '-Wno-fatal', '-Mdir', build_dir] \
                          + verilog_path_args \
                          + verilog_defines \
+                         + add_verilator_args \
                          + ['-CFLAGS',
-                        #    '-fPIC -shared --std=c++11 -DVL_USER_FINISH',
                            '-fPIC -shared -DVL_USER_FINISH',
                             '--trace',
                             '--cc',
