@@ -59,10 +59,10 @@ test_verilog = '''
 endmodule
 '''
 
-with open('adder.v', 'w') as f:
+with open('adder.sv', 'w') as f:
     f.write(test_verilog)
 
-sim = pyverilator.PyVerilator.build('adder.v')
+sim = pyverilator.PyVerilator.build('adder.sv')
 
 # start gtkwave to view the waveforms as they are made
 # sim.start_gtkwave()
