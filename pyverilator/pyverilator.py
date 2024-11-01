@@ -406,8 +406,6 @@ class PyVerilator:
         # get the module name from the verilog file name
         top_verilog_file_base = os.path.basename(top_verilog_file)
         verilog_module_name, extension = os.path.splitext(top_verilog_file_base)
-        if extension != '.v':
-            raise ValueError('PyVerilator() expects top_verilog_file to be a verilog file ending in .v')
 
         # prepare the path for the C++ wrapper file
         if not os.path.exists(build_dir):
